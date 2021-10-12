@@ -1,0 +1,79 @@
+\documentclass[12pt]{extarticle}
+
+\usepackage{./templates/arxiv/arxiv_derivation}
+
+% (1) choose a font that is available as T1
+% for example:
+\usepackage{lmodern}
+
+% (2) specify encoding
+\usepackage[T1]{fontenc}
+
+% (3) load symbol definitions
+\usepackage{textcomp}
+
+\usepackage{hyperref}       % hyperlinks
+\usepackage{url}            % simple URL typesetting
+\usepackage{booktabs}       % professional-quality tables
+\usepackage{amsfonts}       % blackboard math symbols
+\usepackage{nicefrac}       % compact symbols for 1/2, etc.
+\usepackage{braket}			% Braket notation
+\usepackage{amsmath} 		% Split equations
+\usepackage{graphicx}		% pictures
+\usepackage{verbatim}		% multiline comments
+
+\usepackage{caption}		% Figure Captions
+\usepackage{subcaption}		% Subfigures
+\usepackage{cleveref}		% Better referencing
+
+\usepackage[section]{placeins} % prevent figures to apear in different sections
+\usepackage{framed}
+
+\title{Electronic Excitations in Molecular Crystals}
+
+
+\author{
+	Marick Manrho\thanks{\texttt{m.manrho@rug.nl}}\\
+	Zernike Institute for Advanced Materials\\
+	University of Groningen\\
+	Nijenborgh 4, 9747 AG Groningen, \\
+	The Netherlands\\
+}
+
+\begin{document}
+\maketitle
+%\tableofcontents
+%\newpage
+
+In this document we will derive derive a general exciton Hamiltonian in the second quantization notation and then transition to the Heitler-London approximation. We follow the derivation of Agranovich and Galanin but with the inclusion of additional steps and proofs. In particular we will list all approximations as we encounter them.
+
+\section{Crystal Hamiltonian}
+We will describe a molecular crystal consisting of $N$ unit cells where each unit cell contains $\sigma$ molecules. An isolated molecule in the crystal is then labeled with $n$ and $\alpha$ corresponding with the unit cell and the position within the unit cell respectively. The Hamiltonian for an isolated molecule can, for example, be thought of the molecular Hamiltonian written in a HOMO-LUMO basis. The eigenvectors $\phi_{n\alpha}^f$ and eigenenergies $\epsilon_{n\alpha}^f$ of the isolated molecular Hamiltonian satisfy
+\begin{equation}
+    \hat{H}_{n\alpha} \phi_{n\alpha}^f = \epsilon_{n\alpha}^f \phi_{n\alpha}^f
+\end{equation}
+In the HOMO-LUMO basis, the eigenvectors $\phi_{n\alpha}^f$ give the coefficients of how much each molecular orbital contributes to the eigenstate $f$. 
+
+When we place multiple molecules in a crystal the molecules can, of course, interact with each other. We now assume that the interactions are linear, i.e. the eigenbasis of an isolated molecule remains a good molecular basis in the crystal. This is justified if we limit ourselves to what Agranovich calls "instantaneous Coulomb interactions" between molecular eigenstates. This approximation means that one neglects the polarizability of the eigenstates of isolated molecules.
+
+\noindent\fbox{\begin{minipage}{\textwidth}
+\paragraph{Approx. 1.} Non-linear interactions between molecules are neglected.
+\end{minipage}}
+
+This leads to the crystal Hamiltonian given by
+\begin{equation}
+    \hat{H} = \sum_{n\alpha} \hat{H}_{n\alpha} + \frac{1}{2} \sum_{n\alpha m\beta}^{} ' \hat{V}_{n\alpha  m\beta}
+\end{equation}
+where $\hat{V}_{n\alpha m\beta}$ is the interaction energy between states $n\alpha$ and $m\beta$. The prime in the summation denotes the exclusion of the term $n\alpha=m\beta$. A simplified basis is labeled by $n=\{n\alpha\}$ and $m=\{m\beta\}$ where now $n$ and $m$ simply run over all molecules of the crystal.
+
+\section{Number operators}
+In this section we define a occupation number and define a corresponding number operator. The occupation number describes how many times a molecular eigenstate is excited. In this case an eigenstate can only be occupied once. Therefore the occupation number can only be zero or one. Furthermore, each molecule must have one eigenstate excited, i.e.
+\begin{equation}
+    \sum_f N_{nf} = 1
+\end{equation}
+and
+\begin{equation}
+    \sum_{nf} N_{nf} = \sigma N
+\end{equation}
+
+\end{document}
