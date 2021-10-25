@@ -2,6 +2,10 @@
 
 \usepackage{./templates/arxiv/arxiv_derivation}
 
+\usepackage{braket}
+\usepackage{mathtools}
+\usepackage{blkarray, bigstrut}
+
 % (1) choose a font that is available as T1
 % for example:
 \usepackage{lmodern}
@@ -33,11 +37,11 @@
 
 
 \author{
-	Marick Manrho\thanks{\texttt{m.manrho@rug.nl}}\\
+    Theory club\\
+    Theory of Condensed Matter Theory Groups\\
 	Zernike Institute for Advanced Materials\\
 	University of Groningen\\
-	Nijenborgh 4, 9747 AG Groningen, \\
-	The Netherlands\\
+	Writen by Marick Manrho\thanks{\texttt{m.manrho@rug.nl}}
 }
 
 \begin{document}
@@ -48,32 +52,102 @@
 In this document we will derive derive a general exciton Hamiltonian in the second quantization notation and then transition to the Heitler-London approximation. We follow the derivation of Agranovich and Galanin but with the inclusion of additional steps and proofs. In particular we will list all approximations as we encounter them.
 
 \section{Crystal Hamiltonian}
-We will describe a molecular crystal consisting of $N$ unit cells where each unit cell contains $\sigma$ molecules. An isolated molecule in the crystal is then labeled with $n$ and $\alpha$ corresponding with the unit cell and the position within the unit cell respectively. The Hamiltonian for an isolated molecule can, for example, be thought of the molecular Hamiltonian written in a HOMO-LUMO basis. The eigenvectors $\phi_{n\alpha}^f$ and eigenenergies $\epsilon_{n\alpha}^f$ of the isolated molecular Hamiltonian satisfy
+\begin{figure}
+    \centering
+    \includegraphics{Multi-molecule-system.pdf}
+    \caption{Depiction of a molecular crystal with multiple molecules per unit cell.}
+    \label{fig:unit-cell}
+\end{figure}
+We will describe a molecular crystal consisting of $N$ unit cells where each unit cell contains $\sigma$ molecules. An isolated molecule in the crystal is then labeled with $n$ and $\alpha$ corresponding with the unit cell and the position within the unit cell respectively as seen in Fig. \ref{fig:unit-cell}. The Hamiltonian for an isolated molecule can, for example, be thought of the molecular Hamiltonian written in a HOMO-LUMO basis. The eigenvectors $\varphi_{n\alpha}^f$ and eigenenergies $\epsilon_{n\alpha}^f$ of the isolated molecular Hamiltonian satisfy
 \begin{equation}
-    \hat{H}_{n\alpha} \phi_{n\alpha}^f = \epsilon_{n\alpha}^f \phi_{n\alpha}^f
+    \hat{H}_{n\alpha} \varphi_{n\alpha}^f = \epsilon_{n\alpha}^f \varphi_{n\alpha}^f
+    \label{eq:eigenspectrum}
 \end{equation}
-In the HOMO-LUMO basis, the eigenvectors $\phi_{n\alpha}^f$ give the coefficients of how much each molecular orbital contributes to the eigenstate $f$. 
+In the HOMO-LUMO basis, the eigenvectors $\varphi_{n\alpha}^f$ give the coefficients of how much each molecular orbital contributes to the eigenstate $f$. 
 
-When we place multiple molecules in a crystal the molecules can, of course, interact with each other. We now assume that the interactions are linear, i.e. the eigenbasis of an isolated molecule remains a good molecular basis in the crystal. This is justified if we limit ourselves to what Agranovich calls "instantaneous Coulomb interactions" between molecular eigenstates. This approximation means that one neglects the polarizability of the eigenstates of isolated molecules.
+When we place multiple molecules in a crystal the molecules can, of course, interact with each other. We now assume that the interactions are linear, i.e. the eigenbasis of an isolated molecule remains a good molecular basis in the crystal. This is justified if we limit ourselves to what Agranovich calls "instantaneous Coulomb interactions" between molecular eigenstates. This approximation means that one neglects the polarizability of the eigenstates of isolated molecules or one could say one neglects exchange interactions between molecules.
 
 \noindent\fbox{\begin{minipage}{\textwidth}
-\paragraph{Approx. 1.} Non-linear interactions between molecules are neglected.
+\paragraph{Approx. 1.} Interactions that are non-linear in the eigenbasis of isolated molecules are neglected.
 \end{minipage}}
 
 This leads to the crystal Hamiltonian given by
 \begin{equation}
-    \hat{H} = \sum_{n\alpha} \hat{H}_{n\alpha} + \frac{1}{2} \sum_{n\alpha m\beta}^{} ' \hat{V}_{n\alpha  m\beta}
+    \hat{H} = \sum_{n\alpha} \hat{H}_{n\alpha} + \frac{1}{2} \sum_{n\alpha m\beta}^{} {'} \hat{V}_{n\alpha  m\beta}
+    \label{eq:crystal-Hamiltonian}
 \end{equation}
-where $\hat{V}_{n\alpha m\beta}$ is the interaction energy between states $n\alpha$ and $m\beta$. The prime in the summation denotes the exclusion of the term $n\alpha=m\beta$. A simplified basis is labeled by $n=\{n\alpha\}$ and $m=\{m\beta\}$ where now $n$ and $m$ simply run over all molecules of the crystal.
+where $\hat{V}_{n\alpha m\beta}$ is the interaction energy between states $n\alpha$ and $m\beta$. The prime in the summation denotes the exclusion of the term $n\alpha=m\beta$, which excludes interactions of a molecule with itself. A simplified basis is labeled by $n=\{n\alpha\}$ and $m=\{m\beta\}$ where now $n$ and $m$ simply run over all molecules of the crystal.
 
 \section{Number operators}
-In this section we define a occupation number and define a corresponding number operator. The occupation number describes how many times a molecular eigenstate is excited. In this case an eigenstate can only be occupied once. Therefore the occupation number can only be zero or one. Furthermore, each molecule must have one eigenstate excited, i.e.
+In this section we define a occupation number and define a corresponding number operator. The occupation number describes how many times a molecular eigenstate is excited. In this case an eigenstate can only be occupied once. Therefore the occupation number can only be zero or one. Furthermore, each molecule must occupy an eigenstate, i.e.
 \begin{equation}
     \sum_f N_{nf} = 1
 \end{equation}
 and
 \begin{equation}
-    \sum_{nf} N_{nf} = \sigma N
+    \sum_{nf} N_{nf} = \sigma N.
 \end{equation}
+
+We can write a general state of the molecular crystal in terms of occupation numbers as follows
+\begin{equation}
+    \ket{\cdots, N_{nf}, \cdots}.
+\end{equation}
+With the occupation number we can define a number operator giving the occupation number of state $nf$ when acting on a state,
+\begin{equation}
+    \hat{N}_{nf}\ket{\cdots, N_{nf}, \cdots} = N_{nf}\ket{\cdots, N_{nf}, \cdots}
+\end{equation}
+(note that $\hat{N}$ is an operator and $N$ is just a number).
+The matrix representation of $\hat{N}_{nf}$ is trivially found to be
+\begin{equation}
+    \hat{N}_{nf} = 
+  \begin{blockarray}{*{5}{c} l}
+    \begin{block}{*{5}{>{$\footnotesize}c<{$}} l}
+       &  & $nf$ &  &  & \\
+    \end{block}
+    \begin{block}{[*{5}{c}]>{$\footnotesize}l<{$}}
+      0 &  &  &  &  \bigstrut[t]&  \\
+       & \ddots &  & 0 &  &  \\
+       & & 1 &  &  & $nf$ \\
+       & 0 &  & \ddots &  & \\
+      & & &  & 0 & \\
+    \end{block}
+  \end{blockarray}
+\end{equation}
+
+Now one can define a raising ($b_{nf}^\dagger$) and lowering ($b_{nf}$) operators such that
+\begin{equation}
+\begin{split}
+    b_{nf}^\dagger\ket{\cdots, N_{nf}, \cdots} &= \left(1-N_{nf}\right)\ket{\cdots, \left(N_{nf}+1\right), \cdots},\\
+    b_{nf} \ket{\cdots, N_{nf}, \cdots} &= N_{nf}\ket{\cdots, \left(1-N_{nf}\right), \cdots}.
+\end{split}
+\label{eq:raising-lowering}
+\end{equation}
+Note that this definition only works when $N_{nf}$ is either zero or one. It doesn't work for bosonic operators where each state can be occupied more than once. Most of us will know the creation and annihilation operators from a harmonic oscillator but that is a bosonic system while this is fermionic.
+
+Using Eq. \ref{eq:raising-lowering} it is easy to check the anti-commutation relation
+\begin{equation}
+    \begin{split}
+        b_{nf}b_{nf}^\dagger + b_{nf}^\dagger b_{nf} &= 1, \\
+        b_{nf}b_{nf} = b_{nf}^\dagger b_{nf}^\dagger & = 0.
+    \end{split}
+\end{equation}
+One can prove the above statements by multiplying both sides of the equations with the state $\ket{\cdots, N_{nf}, \cdots}$ and apply Eq. \ref{eq:raising-lowering}.
+
+\section{Operator functions}
+What does the eigenvector $\varphi_{n\alpha}^f$ mean? In the case of a molecule the $\varphi_{n\alpha}^f$ contains the coefficients of how much each molecular orbital contributes to the eigenstate $f$. Hence we can map between eigenstates of the Hamiltonian in Eq. \ref{eq:eigenspectrum} and wavefunctions in the Scr\"odinger picture, i.e. the electron distribution in phase-space. We label the dimensions of the phase-space with some dummy variable $\xi_n$ such that we can write the operator wavefunctions as follows
+\begin{equation}
+    \begin{split}
+        \hat{\psi}\left(\cdots \xi_n\cdots\right) &= \sum_{nf} b_{nf} \varphi_n^f(\xi_n), \\
+        \hat{\psi}^\dagger\left(\cdots \xi_n\cdots\right) &= \sum_{nf} b_{nf}^\dagger \varphi_n^{*f}(\xi_n). \\
+    \end{split}
+\end{equation}
+The above equation shows the relationship between electronic orbital wavefunctions and operators in the second quantization representation.
+
+We can also express the number operator in terms of Schr\"odinger wavefunctions
+\begin{equation}
+    \hat{N} = \int \hat{\psi}^\dagger\left(\cdots \xi_n\cdots\right) \hat{\psi}\left(\cdots\xi_n\cdots\right) d\xi = \sum_{nf} b_{nf}^\dagger b_{nf}
+\end{equation}
+The Schr\"odinger representation might not be of much relevance for the number operator but it does make the energy and interactions of the Hamiltonian in Eq. \ref{eq:crystal-Hamiltonian} more intuitive.
+
 
 \end{document}
