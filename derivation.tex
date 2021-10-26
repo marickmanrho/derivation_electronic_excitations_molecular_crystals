@@ -86,6 +86,7 @@ In this section we define a occupation number and define a corresponding number 
 and
 \begin{equation}
     \sum_{nf} N_{nf} = \sigma N.
+    \label{eq:conservation-occupation-number}
 \end{equation}
 
 We can write a general state of the molecular crystal in terms of occupation numbers as follows
@@ -133,6 +134,8 @@ Using Eq. \ref{eq:raising-lowering} it is easy to check the anti-commutation rel
 \end{equation}
 One can prove the above statements by multiplying both sides of the equations with the state $\ket{\cdots, N_{nf}, \cdots}$ and apply Eq. \ref{eq:raising-lowering}.
 
+It is important to make a clear distinction between the vacuum state and a ground state. The ground state of a molecule means that the eigenstate lowest in energy is occupied, e.g. $\ket{g} = \ket{N_g=1, 0, 0 \cdots}$. The vacuum state means that none of the eigenstates is occupied, i.e. $\ket{vac} = \ket{0,0,\cdots 0}$.
+
 \section{Operator functions}
 What does the eigenvector $\varphi_{n\alpha}^f$ mean? In the case of a molecule the $\varphi_{n\alpha}^f$ contains the coefficients of how much each molecular orbital contributes to the eigenstate $f$. Hence we can map between eigenstates of the Hamiltonian in Eq. \ref{eq:eigenspectrum} and wavefunctions in the Scr\"odinger picture, i.e. the electron distribution in phase-space. We label the dimensions of the phase-space with some dummy variable $\xi_n$ such that we can write the operator wavefunctions as follows
 \begin{equation}
@@ -148,6 +151,45 @@ We can also express the number operator in terms of Schr\"odinger wavefunctions
     \hat{N} = \int \hat{\psi}^\dagger\left(\cdots \xi_n\cdots\right) \hat{\psi}\left(\cdots\xi_n\cdots\right) d\xi = \sum_{nf} b_{nf}^\dagger b_{nf}
 \end{equation}
 The Schr\"odinger representation might not be of much relevance for the number operator but it does make the energy and interactions of the Hamiltonian in Eq. \ref{eq:crystal-Hamiltonian} more intuitive.
+
+The Hamiltonian in this picture becomes
+\begin{equation}
+    \hat{H} = \sum \epsilon_f b_{nf}^\dagger b_{nf} + \frac{1}{2} \sum {}' b_{nf'}^\dagger b_{mg'}^\dagger b_{mg} b_{ng} \bra{f'g'}\hat{V}_{nm}\ket{fg}
+\end{equation}
+The interaction term contains two creation and two annihilation operators. This stems from our definition of a state in terms of occupation numbers. See also the previous remarks on the difference between the ground state and the vacuum state. So to make it explicit, the interaction $\bra{f'g'}\hat{V}_{nm}\ket{fg}$ must annihilate the occupation of states $f$ and $g$ and create occupation of states $f'$ and $g'$. The interaction conserves the total number of occupations, namely $\sum_{nf} N_{nf}$ as imposed by Eq. \ref{eq:conservation-occupation-number}.
+
+\section{Two level systems}
+
+In many systems there are only two energy levels which are important for the physics under review. For a molecule this could be the HOMO and LUMO if one is interested in absorption. 
+
+\noindent\fbox{\begin{minipage}{\textwidth}
+\paragraph{Approx. 2.} Each molecule is approximated as two-level system. 
+\end{minipage}}
+
+The molecular ground state is labeled $0$ and the excited state is labeled $f$. Some examples of matrix elements (but not excluded to) are:
+\begin{equation*}
+    \bra{00}\hat{V}_{nm}\ket{00},
+\end{equation*}
+\begin{equation*}
+    \bra{0f}\hat{V}_{nm}\ket{0f},
+\end{equation*}
+\begin{equation*}
+    \bra{f0}\hat{V}_{nm}\ket{0f},
+\end{equation*}
+\begin{equation*}
+    \bra{ff}\hat{V}_{nm}\ket{00}.
+\end{equation*}
+
+One way to think about these interactions is by considering that each state has some permanent dipole moment. Then the $\bra{0f}\hat{V}_{nm}\ket{0f}$ element describes how the dipole moment of the ground state on molecule one couples to the dipole moment of the excited state on molecule two.
+
+We give $\bra{f0}\hat{V}_{nm}\ket{0f} = M_{nm}^f$ a special name as it will turn out later to be our dominant interaction for most systems. We also neglect exchange interactions between molecules such that we can write $\bra{00}\hat{V}_{nm}\ket{ff} = \bra{ff}\hat{V}_{nm}\ket{00}\simeq M_{nm}^f$. In our example where we picture each state to have some permanent dipole, this means the permanent dipole moment of the ground and excited states are approximately equal.
+
+\noindent\fbox{\begin{minipage}{\textwidth}
+\paragraph{Approx. 3.} Exchange interactions between molecules are neglected.
+\end{minipage}}
+
+
+
 
 
 \end{document}
